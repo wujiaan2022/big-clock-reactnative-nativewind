@@ -11,14 +11,14 @@ const App = () => {
   const isLandscape = useOrientation();
 
   return (
-    <View
-      className={`flex-1 items-center justify-center bg-amber-100 ${
-        isLandscape ? 'flex-row' : 'flex-col'
-      }`}>
-      <View>
+    <View className={`flex-1 bg-amber-100 ${isLandscape ? 'flex-row' : 'flex-col'}`}>
+      {/* Clock section */}
+      <View className="flex-1 items-center justify-center">
         <DisplayClock showSeconds={showSeconds} />
       </View>
-      <View>
+
+      {/* Settings section */}
+      <View className="items-center justify-center p-4">
         <SecondsToggle showSeconds={showSeconds} toggleShowSeconds={toggleShowSeconds} />
       </View>
     </View>
