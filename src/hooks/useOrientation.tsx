@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Dimensions } from 'react-native';
 
-const useOrientation = () => {
+export const useOrientation = () => {
   const [isLandscape, setIsLandscape] = useState<boolean>(false);
 
   useEffect(() => {
@@ -20,4 +20,4 @@ const useOrientation = () => {
   return isLandscape;
 };
 
-export default useOrientation;
+

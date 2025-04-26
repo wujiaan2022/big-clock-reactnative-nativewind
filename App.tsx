@@ -1,27 +1,27 @@
+import { useFonts } from 'expo-font';
 import { View } from 'react-native';
 import './global.css';
 
-import DisplayClock from 'components/DisplayClock';
-import SecondsToggle from 'components/SecondsToggle';
-import useToggle from 'hooks/useToggle';
-import useOrientation from 'hooks/useOrientation';
+import { DisplayClock, FontResize, SecondsToggle } from './src/components';
+import { ClockProvider } from './src/context/ClockContext';
 
 const App = () => {
-  const [showSeconds, , toggleShowSeconds] = useToggle();
-  const isLandscape = useOrientation();
-
   return (
-    <View className={`flex-1 bg-amber-100 ${isLandscape ? 'flex-row' : 'flex-col'}`}>
-      {/* Clock section */}
-      <View className="flex-1 items-center justify-center">
-        <DisplayClock showSeconds={showSeconds} />
-      </View>
+    <ClockProvider>
+      <View className="flex-1 bg-amber-100">
+        <View className="flex-1 items-center justify-center">
+          <DisplayClock />
+        </View>
 
-      {/* Settings section */}
-      <View className="items-center justify-center p-4">
-        <SecondsToggle showSeconds={showSeconds} toggleShowSeconds={toggleShowSeconds} />
+        <View>
+          <SecondsToggle />
+        </View>
+
+        <View>
+          <FontResize />
+        </View>
       </View>
-    </View>
+    </ClockProvider>
   );
 };
 
