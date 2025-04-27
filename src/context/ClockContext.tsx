@@ -8,7 +8,7 @@ export const ClockContext = createContext<any>(null);
 export function ClockProvider({ children }: { children: React.ReactNode }) {
   const [showSeconds, , toggleShowSeconds] = useToggle();
   const isLandscape = useOrientation();
-  const { fontSize, increase, decrease, reset } = useFontResize();
+  const { fontSize, increase, decrease, reset } = useFontResize(isLandscape);
   return (
     <ClockContext.Provider
       value={{
@@ -27,5 +27,5 @@ export function ClockProvider({ children }: { children: React.ReactNode }) {
 
 // 3️⃣ Optional: Export a custom hook to access it easily
 export function useClock() {
-    return useContext(ClockContext)
+  return useContext(ClockContext);
 }

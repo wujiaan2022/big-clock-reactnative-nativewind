@@ -1,26 +1,17 @@
 import { useFonts } from 'expo-font';
+import { StatusBar } from 'expo-status-bar';
 import { View } from 'react-native';
 import './global.css';
 
 import { DisplayClock, FontResize, SecondsToggle } from './src/components';
-import { ClockProvider } from './src/context/ClockContext';
+import { ClockProvider, useClock } from './src/context/ClockContext';
+import OrientationBlock from '~/components/OrientationBlock';
 
 const App = () => {
   return (
     <ClockProvider>
-      <View className="flex-1 bg-amber-100">
-        <View className="flex-1 items-center justify-center">
-          <DisplayClock />
-        </View>
-
-        <View>
-          <SecondsToggle />
-        </View>
-
-        <View>
-          <FontResize />
-        </View>
-      </View>
+      <OrientationBlock />
+      <StatusBar style="auto" />
     </ClockProvider>
   );
 };

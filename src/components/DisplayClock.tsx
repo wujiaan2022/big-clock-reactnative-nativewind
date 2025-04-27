@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { View, Text } from 'react-native';
 import { useClock } from '../context/ClockContext';
 
+
 const DisplayClock = () => {
   const [time, setTime] = useState<string>('');
   const { showSeconds, isLandscape, fontSize } = useClock();

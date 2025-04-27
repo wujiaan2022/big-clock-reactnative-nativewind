@@ -1,7 +1,7 @@
 // SecondsToggle.tsx
-
 import { Pressable, Text } from 'react-native';
 import { useClock } from '../context/ClockContext';
+
 
 const SecondsToggle = () => {
   const { toggleShowSeconds, showSeconds } = useClock();
