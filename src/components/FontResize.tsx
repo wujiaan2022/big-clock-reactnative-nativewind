@@ -4,16 +4,16 @@ import { useClock } from '../context/ClockContext';
 export default function FontResize() {
   const { increase, decrease, reset, isLandscape } = useClock();
   return (
-    <View className={`items-center justify-center gap-4 ${isLandscape ? 'flex-col' : 'flex-row'}`}>
+    <View className={`items-center gap-9 ${isLandscape ? 'flex-col' : 'flex-row'}`}>
       {/* Increase */}
       <Pressable onPress={increase}>
         <Text className="text-2xl">➕</Text>
       </Pressable>
 
       {/* Reset */}
-      <Pressable onPress={reset}>
+      {/* <Pressable onPress={reset}>
         <Text className="text-2xl">♻️</Text>
-      </Pressable>
+      </Pressable> */}
 
       {/* Decrease */}
       <Pressable onPress={decrease}>

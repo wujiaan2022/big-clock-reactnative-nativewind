@@ -4,19 +4,29 @@ import { View } from 'react-native';
 
 import { DisplayClock, FontResize, SecondsToggle } from './';
 import { ClockProvider, useClock } from '../context/ClockContext';
+import ThemeSwitch from './ThemeSwitch';
 
 const OrientationBlock = () => {
-  const { isLandscape } = useClock();
+  const { isLandscape, themeStyle } = useClock();
+
+  const controls = [<SecondsToggle />, <FontResize />, <ThemeSwitch />];
 
   return (
-    <View className={`flex-1 bg-amber-100 ${isLandscape ? 'flex-row' : 'flex-col'}`}>
+    <View
+      className={`flex-1 ${isLandscape ? 'flex-row' : 'flex-col'}`}
+      style={{
+        backgroundColor: themeStyle.backgroundColor,
+      }}>
       <View className="flex-1 items-center justify-center">
         <DisplayClock />
       </View>
 
       <View className={`items-center justify-evenly ${isLandscape ? 'flex-col' : 'flex-row'}`}>
-        <SecondsToggle />
-        <FontResize />
+        {controls.map((control, index) => (
+          <View key={index} className="flex-1 items-center justify-evenly">
+            {control}
+          </View>
+        ))}
       </View>
     </View>
   );
