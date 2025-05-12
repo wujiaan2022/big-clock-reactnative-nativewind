@@ -9,22 +9,28 @@ import ThemeSwitch from './ThemeSwitch';
 const OrientationBlock = () => {
   const { isLandscape, themeStyle } = useClock();
 
-  const controls = [<SecondsToggle />, <FontResize />, <ThemeSwitch />];
+  const controls = [SecondsToggle, FontResize, ThemeSwitch];
 
   return (
     <View
       className={`flex-1 ${isLandscape ? 'flex-row' : 'flex-col'}`}
       style={{
         backgroundColor: themeStyle.backgroundColor,
-      }}>
+      }}
+    >
       <View className="flex-1 items-center justify-center">
         <DisplayClock />
       </View>
 
-      <View className={`items-center justify-evenly ${isLandscape ? 'flex-col' : 'flex-row'}`}>
-        {controls.map((control, index) => (
-          <View key={index} className="flex-1 items-center justify-evenly">
-            {control}
+      <View
+        className={`items-center justify-evenly ${isLandscape ? 'flex-col mr-3' : 'flex-row mb-3'}`}
+      >
+        {controls.map((Control, index) => (
+          <View
+            key={index}
+            className="w-full flex-1 items-center justify-evenly"
+          >
+            <Control />
           </View>
         ))}
       </View>

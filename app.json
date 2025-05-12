@@ -9,10 +9,8 @@
     "experiments": {
       "tsconfigPaths": true
     },
-    "plugins": [
-      "expo-font"
-    ],
-    "orientation": "portrait",
+    "plugins": ["expo-font"],
+    "orientation": "default",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
@@ -20,9 +18,7 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true
     },
@@ -30,7 +26,20 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
+      },
+      "package": "com.wujiaan2025.bigpeacefulclock"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "1287646d-9cbb-48a4-9a15-9e641c3fa974"
       }
+    },
+    "owner": "wujiaan2025",
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/1287646d-9cbb-48a4-9a15-9e641c3fa974"
     }
   }
 }
