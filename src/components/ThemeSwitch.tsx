@@ -16,8 +16,11 @@ export default function ThemeSwitch() {
   return (
     <View className="relative items-center justify-center">
       <Pressable onPress={toggleShowThemes}>
-        <Text className="w-full font-bold" style={{ color: themeStyle.color }}>
-          🎨 Theme
+        <Text
+          className="text-2xl font-bold"
+          style={{ color: themeStyle.color }}
+        >
+          🎨
         </Text>
       </Pressable>
       {showThemes && (
@@ -25,8 +28,8 @@ export default function ThemeSwitch() {
           className={clsx(
             `absolute z-10 ${
               isLandscape
-                ? 'left-[-80px] bottom-0 items-start gap-5'
-                : 'bottom-full right-0  mb-3 gap-2'
+                ? 'left-[-80px] bottom-0 items-start gap-7'
+                : 'bottom-full  mb-5 gap-5'
             }`
           )}
         >

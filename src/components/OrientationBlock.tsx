@@ -5,8 +5,11 @@ import { View } from 'react-native';
 import { DisplayClock, FontResize, SecondsToggle } from './';
 import { ClockProvider, useClock } from '../context/ClockContext';
 import ThemeSwitch from './ThemeSwitch';
+import { useNavBar } from '~/hooks/useNavBar';
 
 const OrientationBlock = () => {
+  useNavBar(); // ✅ Fully safe here
+
   const { isLandscape, themeStyle } = useClock();
 
   const controls = [SecondsToggle, FontResize, ThemeSwitch];

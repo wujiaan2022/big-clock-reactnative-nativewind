@@ -9,9 +9,19 @@ export const ClockContext = createContext<any>(null);
 export function ClockProvider({ children }: { children: React.ReactNode }) {
   const [showSeconds, , toggleShowSeconds] = useToggle();
   const isLandscape = useOrientation();
-  const { fontSize, increase, decrease, reset } = useFontResize(isLandscape);
-  const { theme, setTheme, showThemes, setShowThemes, toggleShowThemes, themeStyle, selectTheme } =
-    useTheme();
+  const { fontSize, increase, decrease, reset } = useFontResize(
+    isLandscape,
+    showSeconds
+  );
+  const {
+    theme,
+    setTheme,
+    showThemes,
+    setShowThemes,
+    toggleShowThemes,
+    themeStyle,
+    selectTheme,
+  } = useTheme();
   return (
     <ClockContext.Provider
       value={{
@@ -29,7 +39,8 @@ export function ClockProvider({ children }: { children: React.ReactNode }) {
         toggleShowThemes,
         themeStyle,
         selectTheme,
-      }}>
+      }}
+    >
       {children}
     </ClockContext.Provider>
   );

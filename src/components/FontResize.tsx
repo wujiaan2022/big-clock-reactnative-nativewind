@@ -2,12 +2,16 @@ import { View, Pressable, Text } from 'react-native';
 import { useClock } from '../context/ClockContext';
 
 export default function FontResize() {
-  const { increase, decrease, reset, isLandscape } = useClock();
+  const { increase, decrease, reset, isLandscape, themeStyle } = useClock();
   return (
-    <View className={`items-center gap-9 ${isLandscape ? 'flex-col' : 'flex-row'}`}>
+    <View
+      className={`items-center gap-9 ${isLandscape ? 'flex-col' : 'flex-row'}`}
+    >
       {/* Increase */}
       <Pressable onPress={increase}>
-        <Text className="text-2xl">➕</Text>
+        <Text className="text-2xl" style={{ color: themeStyle.color }}>
+          ➕
+        </Text>
       </Pressable>
 
       {/* Reset */}
@@ -17,7 +21,9 @@ export default function FontResize() {
 
       {/* Decrease */}
       <Pressable onPress={decrease}>
-        <Text className="text-2xl">➖</Text>
+        <Text className="text-2xl" style={{ color: themeStyle.color }}>
+          ➖
+        </Text>
       </Pressable>
     </View>
   );

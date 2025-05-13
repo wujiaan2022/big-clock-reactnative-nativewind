@@ -14,7 +14,7 @@ const App = () => {
   return (
     <ClockProvider>
       <OrientationBlock />
-      <StatusBar style="auto" />
+      <StatusBar hidden={true} />
     </ClockProvider>
   );
 };
