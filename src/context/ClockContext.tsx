@@ -1,6 +1,7 @@
 import { createContext, useContext } from 'react';
 import { useToggle, useOrientation, useFontResize } from '../hooks';
 import { useTheme } from '~/hooks/useTheme';
+import useDelayedToggle from '~/hooks/useDelayedToggle ';
 
 // 1️⃣ Create Context
 export const ClockContext = createContext<any>(null);
@@ -22,6 +23,8 @@ export function ClockProvider({ children }: { children: React.ReactNode }) {
     themeStyle,
     selectTheme,
   } = useTheme();
+  const { value: showControls, resetTimer: resetHideControlsTimer } =
+    useDelayedToggle();
   return (
     <ClockContext.Provider
       value={{
@@ -39,6 +42,8 @@ export function ClockProvider({ children }: { children: React.ReactNode }) {
         toggleShowThemes,
         themeStyle,
         selectTheme,
+        showControls,
+        resetHideControlsTimer,
       }}
     >
       {children}

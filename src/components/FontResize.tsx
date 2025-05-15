@@ -9,8 +9,11 @@ export default function FontResize() {
     >
       {/* Increase */}
       <Pressable onPress={increase}>
-        <Text className="text-2xl" style={{ color: themeStyle.color }}>
-          ➕
+        <Text
+          className="text-3xl font-bold"
+          style={{ color: themeStyle.color }}
+        >
+          +
         </Text>
       </Pressable>
 
@@ -21,8 +24,11 @@ export default function FontResize() {
 
       {/* Decrease */}
       <Pressable onPress={decrease}>
-        <Text className="text-2xl" style={{ color: themeStyle.color }}>
-          ➖
+        <Text
+          className="text-5xl font-bold"
+          style={{ color: themeStyle.color }}
+        >
+          -
         </Text>
       </Pressable>
     </View>
