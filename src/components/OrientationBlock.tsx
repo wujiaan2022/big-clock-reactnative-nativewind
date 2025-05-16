@@ -1,6 +1,6 @@
 import { useFonts } from 'expo-font';
 import { StatusBar } from 'expo-status-bar';
-import { TouchableWithoutFeedback, View } from 'react-native';
+import { TouchableWithoutFeedback, View, Text } from 'react-native';
 
 import { DisplayClock, FontResize, SecondsToggle } from './';
 import { ClockProvider, useClock } from '../context/ClockContext';
@@ -10,8 +10,13 @@ import { useNavBar } from '~/hooks/useNavBar';
 const OrientationBlock = () => {
   useNavBar(); // ✅ Fully safe here
 
-  const { isLandscape, themeStyle, showControls, resetHideControlsTimer } =
-    useClock();
+  const {
+    isLandscape,
+    themeStyle,
+    showControls,
+    resetHideControlsTimer,
+    notice,
+  } = useClock();
 
   const controls = [SecondsToggle, FontResize, ThemeSwitch];
 
@@ -23,8 +28,24 @@ const OrientationBlock = () => {
           backgroundColor: themeStyle.backgroundColor,
         }}
       >
-        <View className="flex-1 items-center justify-center">
+        <View className="relative flex-1 flex-col items-center justify-evenly">
           <DisplayClock />
+          {notice && (
+            <View
+              className={`absolute z-10 ${
+                isLandscape
+                  ? 'right-10 top-6' // 📺 Landscape: Top-right
+                  : 'bottom-6' // 📱 Portrait: Above control bar
+              }`}
+            >
+              <Text
+                className="text-base font-bold"
+                style={{ color: themeStyle.color }}
+              >
+                {notice}
+              </Text>
+            </View>
+          )}
         </View>
 
         {showControls && (

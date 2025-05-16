@@ -10,7 +10,7 @@ export const ClockContext = createContext<any>(null);
 export function ClockProvider({ children }: { children: React.ReactNode }) {
   const [showSeconds, , toggleShowSeconds] = useToggle();
   const isLandscape = useOrientation();
-  const { fontSize, increase, decrease, reset } = useFontResize(
+  const { fontSize, increase, decrease, reset, notice } = useFontResize(
     isLandscape,
     showSeconds
   );
@@ -35,6 +35,7 @@ export function ClockProvider({ children }: { children: React.ReactNode }) {
         increase,
         decrease,
         reset,
+        notice,
         theme,
         setTheme,
         showThemes,

@@ -2,7 +2,8 @@ import { View, Pressable, Text } from 'react-native';
 import { useClock } from '../context/ClockContext';
 
 export default function FontResize() {
-  const { increase, decrease, reset, isLandscape, themeStyle } = useClock();
+  const { increase, decrease, reset, notice, isLandscape, themeStyle } =
+    useClock();
   return (
     <View
       className={`items-center gap-9 ${isLandscape ? 'flex-col' : 'flex-row'}`}
