@@ -1,6 +1,7 @@
+// src/hooks/useDelayedToggle.ts
 import { useEffect, useState } from 'react';
 
-export default function useDelayedToggle(initial = true, delay = 8000) {
+export const useDelayedToggle = (initial = true, delay = 8000) => {
   const [value, setValue] = useState(initial);
   const [timer, setTimer] = useState<ReturnType<typeof setTimeout> | null>(
     null
@@ -23,4 +24,4 @@ export default function useDelayedToggle(initial = true, delay = 8000) {
   }, []);
 
   return { value, setValue, resetTimer };
-}
+};

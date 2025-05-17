@@ -1,7 +1,12 @@
 import { createContext, useContext } from 'react';
-import { useToggle, useOrientation, useFontResize } from '../hooks';
-import { useTheme } from '~/hooks/useTheme';
-import useDelayedToggle from '~/hooks/useDelayedToggle ';
+import {
+  useToggle,
+  useTheme,
+  useOrientation,
+  useNavBar,
+  useFontResize,
+  useDelayedToggle,
+} from '../hooks';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useEffect } from 'react';
