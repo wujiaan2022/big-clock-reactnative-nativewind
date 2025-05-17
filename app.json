@@ -2,7 +2,21 @@
   "expo": {
     "name": "Big Peaceful Clock",
     "slug": "big-peaceful-clock",
-    "version": "1.0.0",
+
+    "version": "1.0.1",
+    "ios": {
+      "buildNumber": "2",
+      "supportsTablet": true
+    },
+    "android": {
+      "versionCode": 2,
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      },
+      "package": "com.wujiaan2025.bigpeacefulclock"
+    },
+
     "web": {
       "favicon": "./assets/favicon.png"
     },
@@ -19,16 +33,7 @@
       "backgroundColor": "#ffffff"
     },
     "assetBundlePatterns": ["**/*"],
-    "ios": {
-      "supportsTablet": true
-    },
-    "android": {
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
-      },
-      "package": "com.wujiaan2025.bigpeacefulclock"
-    },
+
     "extra": {
       "eas": {
         "projectId": "1287646d-9cbb-48a4-9a15-9e641c3fa974"

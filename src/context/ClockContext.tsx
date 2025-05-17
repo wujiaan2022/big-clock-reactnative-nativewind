@@ -68,6 +68,9 @@ export function ClockProvider({ children }: { children: React.ReactNode }) {
 
   // ⬇️ AFTER ALL HOOKS ARE CALLED
 
+  const maxFont = isLandscape ? (showSeconds ? 13 : 18) : showSeconds ? 6 : 9;
+  const safeFontSize = fontSize ?? maxFont;
+
   type ClockSettings = {
     showSeconds: boolean;
     theme: string;
@@ -104,7 +107,7 @@ export function ClockProvider({ children }: { children: React.ReactNode }) {
         const settings: ClockSettings = {
           showSeconds,
           theme,
-          fontSize,
+          fontSize: safeFontSize,
         };
         await AsyncStorage.setItem('clock-settings', JSON.stringify(settings));
       } catch (error) {
@@ -120,7 +123,7 @@ export function ClockProvider({ children }: { children: React.ReactNode }) {
         showSeconds,
         toggleShowSeconds,
         isLandscape,
-        fontSize,
+        fontSize: safeFontSize,
         increase,
         decrease,
         reset,
