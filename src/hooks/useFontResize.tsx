@@ -7,12 +7,13 @@ export function useFontResize(isLandscape: boolean, showSeconds: boolean) {
   const minFont = isLandscape && showSeconds ? 9 : isLandscape ? 12 : 3;
   const maxFont = isLandscape ? (showSeconds ? 13 : 18) : showSeconds ? 6 : 9;
 
-  const [fontSize, setFontSize] = useState<number>(maxFont);
+  const [fontSize, setFontSize] = useState<number | undefined>(undefined);
+
   const [notice, setNotice] = useState<string | null>(null);
 
   const increase = () => {
-    if (fontSize < maxFont) {
-      setFontSize(prev => prev + 1);
+    if (fontSize !== undefined && fontSize < maxFont) {
+      setFontSize(prev => (prev !== undefined ? prev + 1 : maxFont));
       setNotice(null);
     } else {
       setNotice('📏 Max size reached');
@@ -21,21 +22,26 @@ export function useFontResize(isLandscape: boolean, showSeconds: boolean) {
   };
 
   const decrease = () => {
-    if (fontSize > minFont) {
-      setFontSize(prev => prev - 1);
+    if (fontSize !== undefined && fontSize > minFont) {
+      setFontSize(prev => (prev !== undefined ? prev - 1 : minFont));
       setNotice(null);
     } else {
       setNotice('🪶 Min size reached');
     }
   };
 
-  const reset = () => {
-    setFontSize(minFont);
+  const reset = (size?: number) => {
+    if (typeof size === 'number') {
+      setFontSize(size);
+    } else {
+      setFontSize(maxFont); // fallback to your initial size
+    }
   };
 
-  // 🔥 Add this useEffect
   useEffect(() => {
-    setFontSize(maxFont);
+    if (fontSize === undefined) {
+      setFontSize(maxFont); // initial default only once
+    }
   }, [isLandscape, showSeconds]); // ✅ Runs whenever orientation and show seconds changes!
 
   useEffect(() => {
