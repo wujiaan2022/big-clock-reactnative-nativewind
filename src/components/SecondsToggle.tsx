@@ -2,7 +2,7 @@
 import { Pressable, Text } from 'react-native';
 import { useClock } from '../context/ClockContext';
 
-const SecondsToggle = () => {
+export default function SecondsToggle() {
   const { toggleShowSeconds, showSeconds, themeStyle } = useClock();
   return (
     <Pressable onPress={toggleShowSeconds}>
@@ -14,6 +14,4 @@ const SecondsToggle = () => {
       </Text>
     </Pressable>
   );
-};
-
-export default SecondsToggle;
+}

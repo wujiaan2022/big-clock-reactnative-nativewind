@@ -2,9 +2,10 @@ import { useEffect, useState } from 'react';
 import { View, Text } from 'react-native';
 import { useClock } from '../context/ClockContext';
 
-const DisplayClock = () => {
+export default function DisplayClock() {
   const [time, setTime] = useState<string>('');
   const {
+    isLandscape,
     showSeconds,
     fontSize,
     theme,
@@ -38,17 +39,19 @@ const DisplayClock = () => {
     console.log('🧪 Current theme class:', theme);
   }, [themeStyle]);
 
+  const maxFont = isLandscape ? (showSeconds ? 13 : 18) : showSeconds ? 6 : 9;
+  const safeFontSize = fontSize ?? maxFont;
+
   return (
     <View className="w-full flex-1 items-center justify-center">
       <Text
-        style={{ fontSize: fontSize * 10, color: themeStyle.color }}
+        style={{ fontSize: safeFontSize * 10, color: themeStyle.color }}
         className="text-center font-bold"
         numberOfLines={1}
-        adjustsFontSizeToFit={false}>
+        adjustsFontSizeToFit={false}
+      >
         {time}
       </Text>
     </View>
   );
-};
-
-export default DisplayClock;
+}

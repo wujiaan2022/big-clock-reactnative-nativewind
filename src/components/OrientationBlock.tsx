@@ -7,7 +7,7 @@ import { ClockProvider, useClock } from '../context/ClockContext';
 import ThemeSwitch from './ThemeSwitch';
 import { useNavBar } from '~/hooks/useNavBar';
 
-const OrientationBlock = () => {
+export default function OrientationBlock() {
   useNavBar(); // ✅ Fully safe here
 
   const {
@@ -89,6 +89,4 @@ const OrientationBlock = () => {
       </TouchableWithoutFeedback>
     </View>
   );
-};
-
-export default OrientationBlock;
+}

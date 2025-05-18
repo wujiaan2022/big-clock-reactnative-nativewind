@@ -20,7 +20,7 @@ export interface ClockContextType {
 
   isLandscape: boolean;
 
-  fontSize: number;
+  fontSize: number | undefined;
   increase: () => void;
   decrease: () => void;
   reset: () => void;
@@ -79,7 +79,7 @@ export function ClockProvider({ children }: { children: React.ReactNode }) {
   type ClockSettings = {
     showSeconds: boolean;
     theme: string;
-    fontSize: number;
+    fontSize?: number; // ← ✅ optional
   };
 
   useEffect(() => {

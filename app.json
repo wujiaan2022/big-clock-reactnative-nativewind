@@ -3,13 +3,13 @@
     "name": "Big Peaceful Clock",
     "slug": "big-peaceful-clock",
 
-    "version": "1.0.2",
+    "version": "1.0.3",
     "ios": {
-      "buildNumber": "3",
+      "buildNumber": "4",
       "supportsTablet": true
     },
     "android": {
-      "versionCode": 3,
+      "versionCode": 4,
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
