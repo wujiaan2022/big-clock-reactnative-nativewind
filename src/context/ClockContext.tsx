@@ -3,16 +3,15 @@ import {
   useToggle,
   useTheme,
   useOrientation,
-  useNavBar,
   useFontResize,
   useDelayedToggle,
 } from '../hooks';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
-import type { ImageSourcePropType } from 'react-native'; // for image
-import type { ThemeMode } from '~/hooks/useTheme'; // reuse your type
+import type { ImageSourcePropType } from 'react-native';
+import type { ThemeMode } from '~/hooks/useTheme';
 
 export interface ClockContextType {
   showSeconds: boolean;
@@ -20,7 +19,7 @@ export interface ClockContextType {
 
   isLandscape: boolean;
 
-  fontSize: number | undefined;
+  fontSize: number;
   increase: () => void;
   decrease: () => void;
   reset: () => void;
@@ -45,6 +44,8 @@ export interface ClockContextType {
 
   showControls: boolean;
   resetHideControlsTimer: () => void;
+
+  isSettingsLoaded: boolean;
 }
 
 // 1️⃣ Create Context
@@ -52,12 +53,15 @@ export const ClockContext = createContext<ClockContextType | null>(null);
 
 // 2️⃣ Create Provider
 export function ClockProvider({ children }: { children: React.ReactNode }) {
+  const [isSettingsLoaded, setIsSettingsLoaded] = useState(false);
   const [showSeconds, , toggleShowSeconds] = useToggle();
   const isLandscape = useOrientation();
+
   const { fontSize, increase, decrease, reset, notice } = useFontResize(
     isLandscape,
     showSeconds
   );
+
   const {
     theme,
     setTheme,
@@ -68,20 +72,11 @@ export function ClockProvider({ children }: { children: React.ReactNode }) {
     themeBackground,
     selectTheme,
   } = useTheme();
+
   const { value: showControls, resetTimer: resetHideControlsTimer } =
     useDelayedToggle();
 
-  // ⬇️ AFTER ALL HOOKS ARE CALLED
-
-  const maxFont = isLandscape ? (showSeconds ? 13 : 18) : showSeconds ? 6 : 9;
-  const safeFontSize = fontSize ?? maxFont;
-
-  type ClockSettings = {
-    showSeconds: boolean;
-    theme: string;
-    fontSize?: number; // ← ✅ optional
-  };
-
+  // Only load non-font settings
   useEffect(() => {
     const loadSettings = async () => {
       try {
@@ -89,18 +84,18 @@ export function ClockProvider({ children }: { children: React.ReactNode }) {
         if (settings) {
           const parsed = JSON.parse(settings);
 
-          if (
-            typeof parsed.showSeconds === 'boolean' &&
-            typeof parsed.theme === 'string' &&
-            typeof parsed.fontSize === 'number'
-          ) {
+          if (typeof parsed.showSeconds === 'boolean') {
             toggleShowSeconds(parsed.showSeconds);
+          }
+
+          if (typeof parsed.theme === 'string') {
             setTheme(parsed.theme);
-            reset(parsed.fontSize);
           }
         }
       } catch (error) {
         console.log('Error loading settings:', error);
+      } finally {
+        setIsSettingsLoaded(true);
       }
     };
     loadSettings();
@@ -109,18 +104,18 @@ export function ClockProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     const saveSettings = async () => {
       try {
-        const settings: ClockSettings = {
+        const settings = {
           showSeconds,
           theme,
-          fontSize: safeFontSize,
         };
         await AsyncStorage.setItem('clock-settings', JSON.stringify(settings));
       } catch (error) {
         console.log('Error saving settings:', error);
       }
     };
+
     saveSettings();
-  }, [showSeconds, theme, fontSize]);
+  }, [showSeconds, theme]); // ✅ Save when either changes
 
   return (
     <ClockContext.Provider
@@ -128,7 +123,7 @@ export function ClockProvider({ children }: { children: React.ReactNode }) {
         showSeconds,
         toggleShowSeconds,
         isLandscape,
-        fontSize: safeFontSize,
+        fontSize,
         increase,
         decrease,
         reset,
@@ -143,6 +138,7 @@ export function ClockProvider({ children }: { children: React.ReactNode }) {
         selectTheme,
         showControls,
         resetHideControlsTimer,
+        isSettingsLoaded,
       }}
     >
       {children}
