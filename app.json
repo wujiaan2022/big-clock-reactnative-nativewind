@@ -2,7 +2,8 @@
   "expo": {
     "name": "Big Peaceful Clock",
     "slug": "big-peaceful-clock",
-
+    "platforms": ["ios", "android", "web"],
+    "backgroundColor": "#000000",
     "version": "1.0.3",
     "ios": {
       "buildNumber": "4",
