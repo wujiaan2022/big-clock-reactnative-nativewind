@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 
 export function useFontResize(isLandscape: boolean, showSeconds: boolean) {
   const minFont = isLandscape && showSeconds ? 9 : isLandscape ? 12 : 3;
-  const maxFont = isLandscape ? (showSeconds ? 12 : 22) : showSeconds ? 6 : 9;
+  const maxFont = isLandscape ? (showSeconds ? 13 : 23) : showSeconds ? 6 : 9;
 
   const [fontSize, setFontSize] = useState<number>(maxFont);
   const [notice, setNotice] = useState<string | null>(null);
