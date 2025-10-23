@@ -1,22 +1,39 @@
-import { useFonts } from 'expo-font';
-import { StatusBar } from 'expo-status-bar';
+import 'react-native-gesture-handler'; // must be first
+import React, { useCallback, useEffect } from 'react';
 import { View } from 'react-native';
-import './global.css';
-
-import { DisplayClock, FontResize, SecondsToggle } from './src/components';
-import { ClockProvider, useClock } from './src/context/ClockContext';
-import OrientationBlock from '~/components/OrientationBlock';
-
+import { StatusBar } from 'expo-status-bar';
+import * as SplashScreen from 'expo-splash-screen';
 import { useKeepAwake } from 'expo-keep-awake';
 
-const App = () => {
-  useKeepAwake(); // ✅ keeps screen awake
-  return (
-    <ClockProvider>
-      <OrientationBlock />
-      <StatusBar hidden={true} />
-    </ClockProvider>
-  );
-};
+import ErrorBoundary from './src/errors/ErrorBoundary';
+import { installGlobalErrorHandler } from './src/errors/globalErrorHandler';
 
-export default App;
+import { ClockProvider } from './src/context/ClockContext';
+import OrientationBlock from '~/components/OrientationBlock';
+
+// Prevent auto-hide as early as possible
+SplashScreen.preventAutoHideAsync().catch(() => {});
+
+export default function App() {
+  useKeepAwake();
+
+  useEffect(() => {
+    installGlobalErrorHandler();
+  }, []);
+
+  // Hide splash right after the first frame is laid out
+  const onLayoutRootView = useCallback(() => {
+    SplashScreen.hideAsync().catch(() => {});
+  }, []);
+
+  return (
+    <ErrorBoundary>
+      <View style={{ flex: 1 }} onLayout={onLayoutRootView}>
+        <ClockProvider>
+          <OrientationBlock />
+          <StatusBar hidden />
+        </ClockProvider>
+      </View>
+    </ErrorBoundary>
+  );
+}
